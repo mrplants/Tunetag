@@ -25,8 +25,8 @@
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="tunes" inverseEntity="Tag" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Genre" positionX="270" positionY="296" width="128" height="73"/>
         <element name="Tag" positionX="79" positionY="-9" width="128" height="238"/>
         <element name="Tune" positionX="-126" positionY="-72" width="128" height="88"/>
-        <element name="Genre" positionX="270" positionY="296" width="128" height="73"/>
     </elements>
 </model>
