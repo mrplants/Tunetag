@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1406F9671CBB0AFF00885698 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1406F9661CBB0AFF00885698 /* AppDelegate.swift */; };
-		1406F9691CBB0AFF00885698 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1406F9681CBB0AFF00885698 /* ViewController.swift */; };
 		1406F96C1CBB0AFF00885698 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1406F96A1CBB0AFF00885698 /* Main.storyboard */; };
 		1406F96F1CBB0AFF00885698 /* TunetagModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1406F96D1CBB0AFF00885698 /* TunetagModel.xcdatamodeld */; };
 		1406F9711CBB0AFF00885698 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1406F9701CBB0AFF00885698 /* Assets.xcassets */; };
@@ -18,6 +17,31 @@
 		1406F9A41CBB124700885698 /* Tune.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1406F9A31CBB124700885698 /* Tune.swift */; };
 		1406F9A61CBB132300885698 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1406F9A51CBB132300885698 /* Tag.swift */; };
 		1406F9A81CBB13F500885698 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1406F9A71CBB13F500885698 /* Genre.swift */; };
+		1406F9B01CBB17B900885698 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1406F9AF1CBB17B900885698 /* AVFoundation.framework */; };
+		1406F9B21CBB17FC00885698 /* Spotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1406F9B11CBB17FC00885698 /* Spotify.framework */; };
+		1475AC421CC8400300B7A65B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC411CC8400300B7A65B /* Extensions.swift */; };
+		14A51F231CBB1ADB00F4E7A4 /* TuneManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A51F221CBB1ADB00F4E7A4 /* TuneManagerVC.swift */; };
+		14A51F251CBB2A5500F4E7A4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A51F241CBB2A5500F4E7A4 /* Constants.swift */; };
+		14A51FB61CC4109100F4E7A4 /* AWSAPIGateway.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FA51CC4109100F4E7A4 /* AWSAPIGateway.framework */; };
+		14A51FB71CC4109100F4E7A4 /* AWSAutoScaling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FA61CC4109100F4E7A4 /* AWSAutoScaling.framework */; };
+		14A51FB81CC4109100F4E7A4 /* AWSCloudWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FA71CC4109100F4E7A4 /* AWSCloudWatch.framework */; };
+		14A51FB91CC4109100F4E7A4 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FA81CC4109100F4E7A4 /* AWSCore.framework */; };
+		14A51FBA1CC4109100F4E7A4 /* AWSDynamoDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FA91CC4109100F4E7A4 /* AWSDynamoDB.framework */; };
+		14A51FBB1CC4109100F4E7A4 /* AWSEC2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FAA1CC4109100F4E7A4 /* AWSEC2.framework */; };
+		14A51FBC1CC4109100F4E7A4 /* AWSElasticLoadBalancing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FAB1CC4109100F4E7A4 /* AWSElasticLoadBalancing.framework */; };
+		14A51FBD1CC4109100F4E7A4 /* AWSIoT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FAC1CC4109100F4E7A4 /* AWSIoT.framework */; };
+		14A51FBE1CC4109100F4E7A4 /* AWSKinesis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FAD1CC4109100F4E7A4 /* AWSKinesis.framework */; };
+		14A51FBF1CC4109100F4E7A4 /* AWSLambda.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FAE1CC4109100F4E7A4 /* AWSLambda.framework */; };
+		14A51FC01CC4109100F4E7A4 /* AWSMachineLearning.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FAF1CC4109100F4E7A4 /* AWSMachineLearning.framework */; };
+		14A51FC11CC4109100F4E7A4 /* AWSMobileAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FB01CC4109100F4E7A4 /* AWSMobileAnalytics.framework */; };
+		14A51FC21CC4109100F4E7A4 /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FB11CC4109100F4E7A4 /* AWSS3.framework */; };
+		14A51FC31CC4109100F4E7A4 /* AWSSES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FB21CC4109100F4E7A4 /* AWSSES.framework */; };
+		14A51FC41CC4109100F4E7A4 /* AWSSimpleDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FB31CC4109100F4E7A4 /* AWSSimpleDB.framework */; };
+		14A51FC51CC4109100F4E7A4 /* AWSSNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FB41CC4109100F4E7A4 /* AWSSNS.framework */; };
+		14A51FC61CC4109200F4E7A4 /* AWSSQS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FB51CC4109100F4E7A4 /* AWSSQS.framework */; };
+		14A51FC81CC410A100F4E7A4 /* AWSCognito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FC71CC410A100F4E7A4 /* AWSCognito.framework */; };
+		14A51FCA1CC410C700F4E7A4 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FC91CC410C700F4E7A4 /* libsqlite3.tbd */; };
+		14A51FCC1CC410CD00F4E7A4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FCB1CC410CD00F4E7A4 /* libz.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +64,6 @@
 /* Begin PBXFileReference section */
 		1406F9631CBB0AFF00885698 /* Tunetag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tunetag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1406F9661CBB0AFF00885698 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1406F9681CBB0AFF00885698 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1406F96B1CBB0AFF00885698 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1406F96E1CBB0AFF00885698 /* Tunetag.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tunetag.xcdatamodel; sourceTree = "<group>"; };
 		1406F9701CBB0AFF00885698 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,6 +79,31 @@
 		1406F9A31CBB124700885698 /* Tune.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tune.swift; sourceTree = "<group>"; };
 		1406F9A51CBB132300885698 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		1406F9A71CBB13F500885698 /* Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		1406F9AF1CBB17B900885698 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		1406F9B11CBB17FC00885698 /* Spotify.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Spotify.framework; sourceTree = "<group>"; };
+		1475AC411CC8400300B7A65B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		14A51F221CBB1ADB00F4E7A4 /* TuneManagerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TuneManagerVC.swift; sourceTree = "<group>"; };
+		14A51F241CBB2A5500F4E7A4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		14A51FA51CC4109100F4E7A4 /* AWSAPIGateway.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSAPIGateway.framework; path = frameworks/AWSAPIGateway.framework; sourceTree = "<group>"; };
+		14A51FA61CC4109100F4E7A4 /* AWSAutoScaling.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSAutoScaling.framework; path = frameworks/AWSAutoScaling.framework; sourceTree = "<group>"; };
+		14A51FA71CC4109100F4E7A4 /* AWSCloudWatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCloudWatch.framework; path = frameworks/AWSCloudWatch.framework; sourceTree = "<group>"; };
+		14A51FA81CC4109100F4E7A4 /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCore.framework; path = frameworks/AWSCore.framework; sourceTree = "<group>"; };
+		14A51FA91CC4109100F4E7A4 /* AWSDynamoDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSDynamoDB.framework; path = frameworks/AWSDynamoDB.framework; sourceTree = "<group>"; };
+		14A51FAA1CC4109100F4E7A4 /* AWSEC2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSEC2.framework; path = frameworks/AWSEC2.framework; sourceTree = "<group>"; };
+		14A51FAB1CC4109100F4E7A4 /* AWSElasticLoadBalancing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSElasticLoadBalancing.framework; path = frameworks/AWSElasticLoadBalancing.framework; sourceTree = "<group>"; };
+		14A51FAC1CC4109100F4E7A4 /* AWSIoT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSIoT.framework; path = frameworks/AWSIoT.framework; sourceTree = "<group>"; };
+		14A51FAD1CC4109100F4E7A4 /* AWSKinesis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSKinesis.framework; path = frameworks/AWSKinesis.framework; sourceTree = "<group>"; };
+		14A51FAE1CC4109100F4E7A4 /* AWSLambda.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSLambda.framework; path = frameworks/AWSLambda.framework; sourceTree = "<group>"; };
+		14A51FAF1CC4109100F4E7A4 /* AWSMachineLearning.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSMachineLearning.framework; path = frameworks/AWSMachineLearning.framework; sourceTree = "<group>"; };
+		14A51FB01CC4109100F4E7A4 /* AWSMobileAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSMobileAnalytics.framework; path = frameworks/AWSMobileAnalytics.framework; sourceTree = "<group>"; };
+		14A51FB11CC4109100F4E7A4 /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSS3.framework; path = frameworks/AWSS3.framework; sourceTree = "<group>"; };
+		14A51FB21CC4109100F4E7A4 /* AWSSES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSES.framework; path = frameworks/AWSSES.framework; sourceTree = "<group>"; };
+		14A51FB31CC4109100F4E7A4 /* AWSSimpleDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSimpleDB.framework; path = frameworks/AWSSimpleDB.framework; sourceTree = "<group>"; };
+		14A51FB41CC4109100F4E7A4 /* AWSSNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSNS.framework; path = frameworks/AWSSNS.framework; sourceTree = "<group>"; };
+		14A51FB51CC4109100F4E7A4 /* AWSSQS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSQS.framework; path = frameworks/AWSSQS.framework; sourceTree = "<group>"; };
+		14A51FC71CC410A100F4E7A4 /* AWSCognito.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCognito.framework; path = frameworks/extras/AWSCognito.framework; sourceTree = "<group>"; };
+		14A51FC91CC410C700F4E7A4 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		14A51FCB1CC410CD00F4E7A4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +111,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14A51FCC1CC410CD00F4E7A4 /* libz.tbd in Frameworks */,
+				14A51FCA1CC410C700F4E7A4 /* libsqlite3.tbd in Frameworks */,
+				14A51FC61CC4109200F4E7A4 /* AWSSQS.framework in Frameworks */,
+				14A51FB81CC4109100F4E7A4 /* AWSCloudWatch.framework in Frameworks */,
+				14A51FC51CC4109100F4E7A4 /* AWSSNS.framework in Frameworks */,
+				14A51FBB1CC4109100F4E7A4 /* AWSEC2.framework in Frameworks */,
+				14A51FC31CC4109100F4E7A4 /* AWSSES.framework in Frameworks */,
+				14A51FB61CC4109100F4E7A4 /* AWSAPIGateway.framework in Frameworks */,
+				14A51FBF1CC4109100F4E7A4 /* AWSLambda.framework in Frameworks */,
+				14A51FBD1CC4109100F4E7A4 /* AWSIoT.framework in Frameworks */,
+				14A51FB71CC4109100F4E7A4 /* AWSAutoScaling.framework in Frameworks */,
+				14A51FBC1CC4109100F4E7A4 /* AWSElasticLoadBalancing.framework in Frameworks */,
+				14A51FC11CC4109100F4E7A4 /* AWSMobileAnalytics.framework in Frameworks */,
+				14A51FC01CC4109100F4E7A4 /* AWSMachineLearning.framework in Frameworks */,
+				14A51FBE1CC4109100F4E7A4 /* AWSKinesis.framework in Frameworks */,
+				1406F9B01CBB17B900885698 /* AVFoundation.framework in Frameworks */,
+				14A51FC81CC410A100F4E7A4 /* AWSCognito.framework in Frameworks */,
+				14A51FC41CC4109100F4E7A4 /* AWSSimpleDB.framework in Frameworks */,
+				1406F9B21CBB17FC00885698 /* Spotify.framework in Frameworks */,
+				14A51FBA1CC4109100F4E7A4 /* AWSDynamoDB.framework in Frameworks */,
+				14A51FB91CC4109100F4E7A4 /* AWSCore.framework in Frameworks */,
+				14A51FC21CC4109100F4E7A4 /* AWSS3.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +160,7 @@
 				1406F97D1CBB0AFF00885698 /* TunetagTests */,
 				1406F9881CBB0AFF00885698 /* TunetagUITests */,
 				1406F9641CBB0AFF00885698 /* Products */,
+				14A51FA41CC4107C00F4E7A4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,17 +177,9 @@
 		1406F9651CBB0AFF00885698 /* Tunetag */ = {
 			isa = PBXGroup;
 			children = (
-				1406F9661CBB0AFF00885698 /* AppDelegate.swift */,
-				1406F9681CBB0AFF00885698 /* ViewController.swift */,
-				1406F96A1CBB0AFF00885698 /* Main.storyboard */,
-				1406F9701CBB0AFF00885698 /* Assets.xcassets */,
-				1406F9721CBB0AFF00885698 /* LaunchScreen.storyboard */,
-				1406F9751CBB0AFF00885698 /* Info.plist */,
-				1406F96D1CBB0AFF00885698 /* TunetagModel.xcdatamodeld */,
-				1406F9A31CBB124700885698 /* Tune.swift */,
-				1406F9A51CBB132300885698 /* Tag.swift */,
-				1406F9A71CBB13F500885698 /* Genre.swift */,
-				1406F99A1CBB116B00885698 /* Tunetag-Bridging-Header.h */,
+				14A51F291CBB3C4B00F4E7A4 /* Data */,
+				14A51F281CBB3C4300F4E7A4 /* Logic */,
+				14A51F271CBB3C3C00F4E7A4 /* Media */,
 			);
 			path = Tunetag;
 			sourceTree = "<group>";
@@ -137,6 +200,93 @@
 				1406F98B1CBB0AFF00885698 /* Info.plist */,
 			);
 			path = TunetagUITests;
+			sourceTree = "<group>";
+		};
+		14A51F261CBB3C2A00F4E7A4 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				14A51F221CBB1ADB00F4E7A4 /* TuneManagerVC.swift */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		14A51F271CBB3C3C00F4E7A4 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				1406F9701CBB0AFF00885698 /* Assets.xcassets */,
+			);
+			name = Media;
+			sourceTree = "<group>";
+		};
+		14A51F281CBB3C4300F4E7A4 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				14A51F2B1CBB3C8500F4E7A4 /* Startup */,
+				14A51F2A1CBB3C7A00F4E7A4 /* CoreData */,
+				14A51F261CBB3C2A00F4E7A4 /* UI */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
+		14A51F291CBB3C4B00F4E7A4 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				14A51F241CBB2A5500F4E7A4 /* Constants.swift */,
+				1406F96A1CBB0AFF00885698 /* Main.storyboard */,
+				1406F9721CBB0AFF00885698 /* LaunchScreen.storyboard */,
+				1406F96D1CBB0AFF00885698 /* TunetagModel.xcdatamodeld */,
+				1406F9751CBB0AFF00885698 /* Info.plist */,
+				1406F99A1CBB116B00885698 /* Tunetag-Bridging-Header.h */,
+				1475AC411CC8400300B7A65B /* Extensions.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		14A51F2A1CBB3C7A00F4E7A4 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				1406F9A31CBB124700885698 /* Tune.swift */,
+				1406F9A51CBB132300885698 /* Tag.swift */,
+				1406F9A71CBB13F500885698 /* Genre.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		14A51F2B1CBB3C8500F4E7A4 /* Startup */ = {
+			isa = PBXGroup;
+			children = (
+				1406F9661CBB0AFF00885698 /* AppDelegate.swift */,
+			);
+			name = Startup;
+			sourceTree = "<group>";
+		};
+		14A51FA41CC4107C00F4E7A4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14A51FCB1CC410CD00F4E7A4 /* libz.tbd */,
+				14A51FC91CC410C700F4E7A4 /* libsqlite3.tbd */,
+				14A51FC71CC410A100F4E7A4 /* AWSCognito.framework */,
+				14A51FA51CC4109100F4E7A4 /* AWSAPIGateway.framework */,
+				14A51FA61CC4109100F4E7A4 /* AWSAutoScaling.framework */,
+				14A51FA71CC4109100F4E7A4 /* AWSCloudWatch.framework */,
+				14A51FA81CC4109100F4E7A4 /* AWSCore.framework */,
+				14A51FA91CC4109100F4E7A4 /* AWSDynamoDB.framework */,
+				14A51FAA1CC4109100F4E7A4 /* AWSEC2.framework */,
+				14A51FAB1CC4109100F4E7A4 /* AWSElasticLoadBalancing.framework */,
+				14A51FAC1CC4109100F4E7A4 /* AWSIoT.framework */,
+				14A51FAD1CC4109100F4E7A4 /* AWSKinesis.framework */,
+				14A51FAE1CC4109100F4E7A4 /* AWSLambda.framework */,
+				14A51FAF1CC4109100F4E7A4 /* AWSMachineLearning.framework */,
+				14A51FB01CC4109100F4E7A4 /* AWSMobileAnalytics.framework */,
+				14A51FB11CC4109100F4E7A4 /* AWSS3.framework */,
+				14A51FB21CC4109100F4E7A4 /* AWSSES.framework */,
+				14A51FB31CC4109100F4E7A4 /* AWSSimpleDB.framework */,
+				14A51FB41CC4109100F4E7A4 /* AWSSNS.framework */,
+				14A51FB51CC4109100F4E7A4 /* AWSSQS.framework */,
+				1406F9AF1CBB17B900885698 /* AVFoundation.framework */,
+				1406F9B11CBB17FC00885698 /* Spotify.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,10 +421,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1406F9691CBB0AFF00885698 /* ViewController.swift in Sources */,
 				1406F9A41CBB124700885698 /* Tune.swift in Sources */,
 				1406F9A61CBB132300885698 /* Tag.swift in Sources */,
+				14A51F231CBB1ADB00F4E7A4 /* TuneManagerVC.swift in Sources */,
+				1475AC421CC8400300B7A65B /* Extensions.swift in Sources */,
 				1406F9A81CBB13F500885698 /* Genre.swift in Sources */,
+				14A51F251CBB2A5500F4E7A4 /* Constants.swift in Sources */,
 				1406F9671CBB0AFF00885698 /* AppDelegate.swift in Sources */,
 				1406F96F1CBB0AFF00885698 /* TunetagModel.xcdatamodeld in Sources */,
 			);
@@ -422,8 +574,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/frameworks",
+					"$(PROJECT_DIR)/frameworks/extras",
+				);
 				INFOPLIST_FILE = Tunetag/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seantfitzgerald.Tunetag;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tunetag/Tunetag-Bridging-Header.h";
@@ -438,8 +599,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/frameworks",
+					"$(PROJECT_DIR)/frameworks/extras",
+				);
 				INFOPLIST_FILE = Tunetag/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seantfitzgerald.Tunetag;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tunetag/Tunetag-Bridging-Header.h";
@@ -512,6 +682,7 @@
 				1406F9901CBB0AFF00885698 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1406F9911CBB0AFF00885698 /* Build configuration list for PBXNativeTarget "TunetagTests" */ = {
 			isa = XCConfigurationList;
@@ -520,6 +691,7 @@
 				1406F9931CBB0AFF00885698 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1406F9941CBB0AFF00885698 /* Build configuration list for PBXNativeTarget "TunetagUITests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +700,7 @@
 				1406F9961CBB0AFF00885698 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

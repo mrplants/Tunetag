@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Tune ManagerVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Tunetag" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="TuneManagerVC" customModule="Tunetag" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,8 +16,32 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the button" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbp-BI-hck">
+                                <rect key="frame" x="244" y="289" width="112" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJm-Rh-n3Z">
+                                <rect key="frame" x="227" y="251" width="146" height="30"/>
+                                <state key="normal" title="Can I access spotify?"/>
+                                <connections>
+                                    <action selector="checkSpotifyConnection" destination="BYZ-38-t0r" eventType="touchUpInside" id="wpj-q5-RMF"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="sbp-BI-hck" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="21U-ax-M3R"/>
+                            <constraint firstItem="IJm-Rh-n3Z" firstAttribute="centerX" secondItem="sbp-BI-hck" secondAttribute="centerX" id="8wb-DR-JTu"/>
+                            <constraint firstItem="sbp-BI-hck" firstAttribute="top" secondItem="IJm-Rh-n3Z" secondAttribute="bottom" constant="8" id="lP8-uB-zyW"/>
+                            <constraint firstItem="sbp-BI-hck" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ofW-lN-h7H"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="spotifyCheckLabel" destination="sbp-BI-hck" id="5AB-w5-cBO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
