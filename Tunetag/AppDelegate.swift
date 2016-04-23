@@ -14,20 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Properties
     var window: UIWindow?
-    var spotifyUserLoggedIn: Bool {
-        get { return NSUserDefaults.standardUserDefaults().objectForKey(K_SPOTIFY_EXPIRATION_DATE) != nil }
-    }
-    var spotifyTokenValid: Bool {
-        get {
-            if let spotifyTokenExpirationDate = NSUserDefaults.standardUserDefaults().objectForKey(K_SPOTIFY_EXPIRATION_DATE) as? NSDate {
-                // timeIntervalSicneNow is positive if the date is in the future -> user token is still valid -> return true
-                return spotifyTokenExpirationDate.timeIntervalSinceNow > 0
-            } else {
-                return false
-            }
-        }
-    }
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -66,32 +52,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Parse the URL
             let spotifyResponseURLComponents = NSURLComponents.init(URL: url, resolvingAgainstBaseURL: false)!
             if let spotifyResponseQueryItems = spotifyResponseURLComponents.queryItems {
-                
                 // Build a more accessible data structure from the URL query parameters
                 var spotifyResponseParameters = [String:String]()
                 for queryParameter in spotifyResponseQueryItems {
                     spotifyResponseParameters[queryParameter.name] = queryParameter.value
                 }
-                
                 if spotifyResponseParameters["code"] != nil {
                     // Spotify is calling Tunetag because scopes were authorized
-                    // Use the response code to get access and refresh tokens using AWS Lambda
-                    let spotifyTokenRequest = AWSLambdaInvocationRequest()
-                    spotifyTokenRequest.functionName = AWS_LAMBDA_GET_TOKENS_FUNCTION_NAME
-                    let payload = ["code" : spotifyResponseParameters["code"]!]
-                    do {
-                        try spotifyTokenRequest.payload = NSJSONSerialization.aws_dataWithJSONObject(payload, options: .PrettyPrinted)
-                        AWSLambda.defaultLambda().invoke(
-                            spotifyTokenRequest,
-                            completionHandler: {(response, error) -> Void in
-                                let responseObject = response?.payloadJSONObject() as! [String:AnyObject]
-                                NSUserDefaults.standardUserDefaults().setObject(responseObject["access_token"], forKey: K_SPOTIFY_ACCESS_TOKEN)
-                                NSUserDefaults.standardUserDefaults().setObject(responseObject["refresh_token"], forKey: K_SPOTIFY_REFRESH_TOKEN)
-                                NSUserDefaults.standardUserDefaults().setObject(NSDate.init(timeInterval: responseObject["expires_in"] as! NSTimeInterval, sinceDate: NSDate()), forKey: K_SPOTIFY_EXPIRATION_DATE)
-                        })
-                    } catch {
-                        NSLog("Error while serializing JSON Data for AWS")
-                    }
+                    // Use the response code to log in
+                    Spotify.login(spotifyResponseParameters["code"]!)
                 }
             }
             return true
@@ -101,11 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    // MARK: - Spotify Utilities
-    
-    // Following the auth guide from https://developer.spotify.com/web-api/authorization-guide/
-    // See diagram on web page for details
-
     func loginLogic() {
         
         let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast1,
@@ -122,46 +86,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             else {
                 // Spotify login
-                if !self.spotifyUserLoggedIn {
-                    
-                    // Create and open the spotify login URL to request access to scopes
-                    let spotifyScopeRequestURLComponents = NSURLComponents()
-                    spotifyScopeRequestURLComponents.queryItems = [
-                        NSURLQueryItem.init(name: "client_id", value: SPOTIFY_CLIENT_ID),
-                        NSURLQueryItem.init(name: "response_type", value: "code"),
-                        NSURLQueryItem.init(name: "redirect_uri", value: SPOTIFY_AUTH_REDIRECT_URL),
-                        NSURLQueryItem.init(name: "scope", value: SPOTIFY_AUTH_SCOPES),
-                        NSURLQueryItem.init(name: "state", value: SPOTIFY_SCOPE_AUTH_STATE),
-                    ]
-                    spotifyScopeRequestURLComponents.host = "authorize"
-                    spotifyScopeRequestURLComponents.scheme = "spotify-action"
-                    let spotifyLoginURL = spotifyScopeRequestURLComponents.URL
-                    UIApplication.sharedApplication().openURL(spotifyLoginURL!)
-                } else if !self.spotifyTokenValid {
-                    // Get another access token from Spotify through AWS
-                    let spotifyTokenRequest = AWSLambdaInvocationRequest()
-                    spotifyTokenRequest.functionName = AWS_LAMBDA_REFRESH_TOKENS_FUNCTION_NAME
-                    let payload = ["refreshToken" : NSUserDefaults.standardUserDefaults().objectForKey(K_SPOTIFY_REFRESH_TOKEN) as! String]
-                    do {
-                        try spotifyTokenRequest.payload = NSJSONSerialization.aws_dataWithJSONObject(payload, options: .PrettyPrinted)
-                        AWSLambda.defaultLambda().invoke(
-                            spotifyTokenRequest,
-                            completionHandler: {(response, error) -> Void in
-                                let responseObject = response?.payloadJSONObject() as! [String:AnyObject]
-                                NSUserDefaults.standardUserDefaults().setObject(responseObject["access_token"], forKey: K_SPOTIFY_ACCESS_TOKEN)
-                                NSUserDefaults.standardUserDefaults().setObject(responseObject["refresh_token"], forKey: K_SPOTIFY_REFRESH_TOKEN)
-                                NSUserDefaults.standardUserDefaults().setObject(NSDate.init(timeInterval: responseObject["expires_in"] as! NSTimeInterval, sinceDate: NSDate()), forKey: K_SPOTIFY_EXPIRATION_DATE)
-                        })
-                    } catch {
-                        NSLog("Error while serializing JSON Data for AWS")
-                    }
+                if !Spotify.user.loggedIn {
+                    // Open the Spotify login URL to request access to scopes
+                    UIApplication.sharedApplication().openURL(Spotify.scopesRequestURL)
+                } else if !Spotify.user.spotifyTokenValid {
+                    Spotify.user.refreshAccessToken();
                 }
-
             }
             return nil
         }
     }
-
 
     // MARK: - Core Data stack
 
