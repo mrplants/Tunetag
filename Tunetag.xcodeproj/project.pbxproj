@@ -21,6 +21,7 @@
 		1406F9B21CBB17FC00885698 /* Spotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1406F9B11CBB17FC00885698 /* Spotify.framework */; };
 		1475AC421CC8400300B7A65B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC411CC8400300B7A65B /* Extensions.swift */; };
 		1475AC441CCAE97300B7A65B /* Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC431CCAE97300B7A65B /* Spotify.swift */; };
+		1475AC471CCC8C8F00B7A65B /* AWS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC461CCC8C8F00B7A65B /* AWS.swift */; };
 		14A51F231CBB1ADB00F4E7A4 /* TuneManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A51F221CBB1ADB00F4E7A4 /* TuneManagerVC.swift */; };
 		14A51F251CBB2A5500F4E7A4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A51F241CBB2A5500F4E7A4 /* Constants.swift */; };
 		14A51FB61CC4109100F4E7A4 /* AWSAPIGateway.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FA51CC4109100F4E7A4 /* AWSAPIGateway.framework */; };
@@ -84,6 +85,7 @@
 		1406F9B11CBB17FC00885698 /* Spotify.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Spotify.framework; sourceTree = "<group>"; };
 		1475AC411CC8400300B7A65B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1475AC431CCAE97300B7A65B /* Spotify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spotify.swift; sourceTree = "<group>"; };
+		1475AC461CCC8C8F00B7A65B /* AWS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWS.swift; sourceTree = "<group>"; };
 		14A51F221CBB1ADB00F4E7A4 /* TuneManagerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TuneManagerVC.swift; sourceTree = "<group>"; };
 		14A51F241CBB2A5500F4E7A4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		14A51FA51CC4109100F4E7A4 /* AWSAPIGateway.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSAPIGateway.framework; path = frameworks/AWSAPIGateway.framework; sourceTree = "<group>"; };
@@ -207,6 +209,8 @@
 		1475AC451CCAE98E00B7A65B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				1406F9661CBB0AFF00885698 /* AppDelegate.swift */,
+				1475AC461CCC8C8F00B7A65B /* AWS.swift */,
 				1475AC431CCAE97300B7A65B /* Spotify.swift */,
 			);
 			name = Utilities;
@@ -215,7 +219,6 @@
 		14A51F261CBB3C2A00F4E7A4 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				1406F9661CBB0AFF00885698 /* AppDelegate.swift */,
 				14A51F221CBB1ADB00F4E7A4 /* TuneManagerVC.swift */,
 			);
 			name = UI;
@@ -427,6 +430,7 @@
 				1406F9A41CBB124700885698 /* Tune.swift in Sources */,
 				1406F9A61CBB132300885698 /* Tag.swift in Sources */,
 				14A51F231CBB1ADB00F4E7A4 /* TuneManagerVC.swift in Sources */,
+				1475AC471CCC8C8F00B7A65B /* AWS.swift in Sources */,
 				1475AC441CCAE97300B7A65B /* Spotify.swift in Sources */,
 				1475AC421CC8400300B7A65B /* Extensions.swift in Sources */,
 				1406F9A81CBB13F500885698 /* Genre.swift in Sources */,

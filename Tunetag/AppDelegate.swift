@@ -57,7 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 for queryParameter in spotifyResponseQueryItems {
                     spotifyResponseParameters[queryParameter.name] = queryParameter.value
                 }
-                if spotifyResponseParameters["code"] != nil {
+                if let errorDescription = spotifyResponseParameters["error"] {
+                    NSLog(errorDescription)
+                } else if spotifyResponseParameters["code"] != nil {
                     // Spotify is calling Tunetag because scopes were authorized
                     // Use the response code to log in
                     Spotify.login(spotifyResponseParameters["code"]!)
@@ -71,27 +73,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func loginLogic() {
-        
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast1,
-                                                                identityPoolId:"us-east-1:651a9480-6172-4ab5-82ce-0c8272960212")
-        
-        let configuration = AWSServiceConfiguration(region:.USEast1, credentialsProvider:credentialsProvider)
-        
-        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
-        
-        // Need to get the Cognito ID before setting up Spotify authentication
-        credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-            if (task.error != nil) {
-                print("Error: " + task.error!.localizedDescription)
-            }
-            else {
-                // Spotify login
-                if !Spotify.user.loggedIn {
-                    // Open the Spotify login URL to request access to scopes
-                    UIApplication.sharedApplication().openURL(Spotify.scopesRequestURL)
-                } else if !Spotify.user.spotifyTokenValid {
-                    Spotify.user.refreshAccessToken();
-                }
+        // AWS credential setup
+        AWS.user.login { (task:AWSTask!) -> AnyObject! in
+            // Spotify login
+            if !Spotify.authenticated {
+                // Open the Spotify login URL to request access to scopes
+                UIApplication.sharedApplication().openURL(Spotify.scopesRequestURL)
+            } else {
+                Spotify.user.refreshAccessToken();
             }
             return nil
         }
