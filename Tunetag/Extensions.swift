@@ -24,3 +24,11 @@ extension AWSLambdaInvocationResponse {
         }
     }
 }
+
+extension CFString {
+    var voidPointerCString:UnsafePointer<()> {
+        get{
+            return UnsafePointer(CFStringGetCStringPtr(self, CFStringBuiltInEncodings.UTF8.rawValue))
+        }
+    }
+}

@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // AWS credential setup
         AWS.user.login { (task:AWSTask!) -> AnyObject! in
             // Spotify login
-            if !Spotify.authenticated {
+            if !Spotify.user.authenticated {
                 // Open the Spotify login URL to request access to scopes
                 UIApplication.sharedApplication().openURL(Spotify.scopesRequestURL)
             } else {

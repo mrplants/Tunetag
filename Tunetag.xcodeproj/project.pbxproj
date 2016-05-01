@@ -22,6 +22,11 @@
 		1475AC421CC8400300B7A65B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC411CC8400300B7A65B /* Extensions.swift */; };
 		1475AC441CCAE97300B7A65B /* Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC431CCAE97300B7A65B /* Spotify.swift */; };
 		1475AC471CCC8C8F00B7A65B /* AWS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC461CCC8C8F00B7A65B /* AWS.swift */; };
+		1475AC491CCF0E5A00B7A65B /* TuneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC481CCF0E5A00B7A65B /* TuneTableView.swift */; };
+		1475AC4B1CD4F71900B7A65B /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC4A1CD4F71900B7A65B /* Keychain.swift */; };
+		1475AC4D1CD4FEB900B7A65B /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC4C1CD4FEB900B7A65B /* KeychainItem.swift */; };
+		1475AC4F1CD4FF1C00B7A65B /* KeychainToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC4E1CD4FF1C00B7A65B /* KeychainToken.swift */; };
+		1475AC511CD4FF2D00B7A65B /* KaychainCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC501CD4FF2D00B7A65B /* KaychainCredentials.swift */; };
 		14A51F231CBB1ADB00F4E7A4 /* TuneManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A51F221CBB1ADB00F4E7A4 /* TuneManagerVC.swift */; };
 		14A51F251CBB2A5500F4E7A4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A51F241CBB2A5500F4E7A4 /* Constants.swift */; };
 		14A51FB61CC4109100F4E7A4 /* AWSAPIGateway.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FA51CC4109100F4E7A4 /* AWSAPIGateway.framework */; };
@@ -86,6 +91,12 @@
 		1475AC411CC8400300B7A65B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1475AC431CCAE97300B7A65B /* Spotify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spotify.swift; sourceTree = "<group>"; };
 		1475AC461CCC8C8F00B7A65B /* AWS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWS.swift; sourceTree = "<group>"; };
+		1475AC481CCF0E5A00B7A65B /* TuneTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TuneTableView.swift; sourceTree = "<group>"; };
+		1475AC4A1CD4F71900B7A65B /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		1475AC4C1CD4FEB900B7A65B /* KeychainItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItem.swift; sourceTree = "<group>"; };
+		1475AC4E1CD4FF1C00B7A65B /* KeychainToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainToken.swift; sourceTree = "<group>"; };
+		1475AC501CD4FF2D00B7A65B /* KaychainCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaychainCredentials.swift; sourceTree = "<group>"; };
+		1475AC551CD669DA00B7A65B /* Tunetag.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tunetag.entitlements; sourceTree = "<group>"; };
 		14A51F221CBB1ADB00F4E7A4 /* TuneManagerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TuneManagerVC.swift; sourceTree = "<group>"; };
 		14A51F241CBB2A5500F4E7A4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		14A51FA51CC4109100F4E7A4 /* AWSAPIGateway.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSAPIGateway.framework; path = frameworks/AWSAPIGateway.framework; sourceTree = "<group>"; };
@@ -209,16 +220,37 @@
 		1475AC451CCAE98E00B7A65B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				1475AC571CD6BC5100B7A65B /* Services */,
+				1475AC561CD6BC4200B7A65B /* Keychain */,
 				1406F9661CBB0AFF00885698 /* AppDelegate.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		1475AC561CD6BC4200B7A65B /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				1475AC4A1CD4F71900B7A65B /* Keychain.swift */,
+				1475AC4C1CD4FEB900B7A65B /* KeychainItem.swift */,
+				1475AC4E1CD4FF1C00B7A65B /* KeychainToken.swift */,
+				1475AC501CD4FF2D00B7A65B /* KaychainCredentials.swift */,
+			);
+			name = Keychain;
+			sourceTree = "<group>";
+		};
+		1475AC571CD6BC5100B7A65B /* Services */ = {
+			isa = PBXGroup;
+			children = (
 				1475AC461CCC8C8F00B7A65B /* AWS.swift */,
 				1475AC431CCAE97300B7A65B /* Spotify.swift */,
 			);
-			name = Utilities;
+			name = Services;
 			sourceTree = "<group>";
 		};
 		14A51F261CBB3C2A00F4E7A4 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				1475AC481CCF0E5A00B7A65B /* TuneTableView.swift */,
 				14A51F221CBB1ADB00F4E7A4 /* TuneManagerVC.swift */,
 			);
 			name = UI;
@@ -245,6 +277,7 @@
 		14A51F291CBB3C4B00F4E7A4 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				1475AC551CD669DA00B7A65B /* Tunetag.entitlements */,
 				14A51F241CBB2A5500F4E7A4 /* Constants.swift */,
 				1406F96A1CBB0AFF00885698 /* Main.storyboard */,
 				1406F9721CBB0AFF00885698 /* LaunchScreen.storyboard */,
@@ -305,6 +338,7 @@
 				1406F95F1CBB0AFF00885698 /* Sources */,
 				1406F9601CBB0AFF00885698 /* Frameworks */,
 				1406F9611CBB0AFF00885698 /* Resources */,
+				1475AC521CD504CC00B7A65B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -364,6 +398,11 @@
 					1406F9621CBB0AFF00885698 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = PTAUHZ2E6Z;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					1406F9791CBB0AFF00885698 = {
 						CreatedOnToolsVersion = 7.3;
@@ -422,20 +461,41 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1475AC521CD504CC00B7A65B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Debug\" ]; then\nTAGS=\"TODO:|FIXME:|WARNING:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1406F95F1CBB0AFF00885698 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				1406F9A41CBB124700885698 /* Tune.swift in Sources */,
+				1475AC491CCF0E5A00B7A65B /* TuneTableView.swift in Sources */,
+				1475AC4D1CD4FEB900B7A65B /* KeychainItem.swift in Sources */,
 				1406F9A61CBB132300885698 /* Tag.swift in Sources */,
 				14A51F231CBB1ADB00F4E7A4 /* TuneManagerVC.swift in Sources */,
+				1475AC4F1CD4FF1C00B7A65B /* KeychainToken.swift in Sources */,
 				1475AC471CCC8C8F00B7A65B /* AWS.swift in Sources */,
+				1475AC4B1CD4F71900B7A65B /* Keychain.swift in Sources */,
 				1475AC441CCAE97300B7A65B /* Spotify.swift in Sources */,
 				1475AC421CC8400300B7A65B /* Extensions.swift in Sources */,
 				1406F9A81CBB13F500885698 /* Genre.swift in Sources */,
 				14A51F251CBB2A5500F4E7A4 /* Constants.swift in Sources */,
 				1406F9671CBB0AFF00885698 /* AppDelegate.swift in Sources */,
+				1475AC511CD4FF2D00B7A65B /* KaychainCredentials.swift in Sources */,
 				1406F96F1CBB0AFF00885698 /* TunetagModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,6 +641,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Tunetag/Tunetag.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
@@ -606,6 +667,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Tunetag/Tunetag.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;

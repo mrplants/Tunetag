@@ -13,16 +13,19 @@ class TuneManagerVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
-        Spotify.user.getUserData { self.musicTable.reloadData() }
+        refreshMusicList()
     }
     
     // MARK: Actions
     @IBAction func refreshMusicList() {
-        Spotify.user.getUserData { self.musicTable.reloadData() }
+        Spotify.user.getUserData { (err:NSError?) in
+            assert(err == nil, err!.description)
+            self.tuneTable.reloadData()
+        }
     }
     
     //Mark: Outlets
-    @IBOutlet weak var musicTable: UITableView!
+    @IBOutlet weak var tuneTable: TuneTableView!
     
     //MARK: UITableView Delegate Methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -36,14 +39,31 @@ class TuneManagerVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let track = Spotify.user.savedTracks?[indexPath.row]
         if let cell = tableView.dequeueReusableCellWithIdentifier("track cell") {
-            cell.textLabel?.text = Spotify.user.savedTracks?[indexPath.row].name
-            return cell
+            return setupMusicTrackCell(cell, spotifyTrack: track)
         } else {
             let cell = UITableViewCell(style: .Default,
                                    reuseIdentifier: "track cell")
-            cell.textLabel?.text = Spotify.user.savedTracks?[indexPath.row].name
-            return cell
+            return setupMusicTrackCell(cell, spotifyTrack: track)
         }
+    }
+    //MARK: Utility Methods
+    func setupMusicTrackCell(cell:UITableViewCell, spotifyTrack:SPTTrack? = nil) -> UITableViewCell {
+        if let track = spotifyTrack {
+            cell.textLabel?.text = track.name
+            cell.imageView?.image = nil
+            NSURLSession.sharedSession().dataTaskWithURL(
+                track.album.largestCover.imageURL,
+                completionHandler: {(data, response, error)->Void in
+                    if let imageData = data {
+                        NSOperationQueue.mainQueue().addOperationWithBlock(){
+                            cell.imageView?.image = UIImage(data: imageData)
+                            cell.setNeedsLayout()
+                        }
+                    }
+                }).resume()
+        }
+        return cell
     }
 }

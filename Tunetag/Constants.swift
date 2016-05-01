@@ -22,9 +22,9 @@ let SPOTIFY_AUTH_SCOPES =
         "user-read-email " + // Read access to user’s email address.	"Get your real email address"
         "user-top-read" // Read access to a user's top artists and tracks	"Read your top artists and tracks"
 let SPOTIFY_SCOPE_AUTH_STATE = "SCOPE AUTHORIZATION"
-let K_SPOTIFY_ACCESS_TOKEN = "spotify access token key"
-let K_SPOTIFY_REFRESH_TOKEN = "spotify refresh token key"
-let K_SPOTIFY_EXPIRATION_DATE = "spotify access token expiration date key"
+let SPOTIFY_ACCESS_TOKEN = "spotify access token key"
+let SPOTIFY_REFRESH_TOKEN = "spotify refresh token key"
+let SPOTIFY_WEB_API_ACCESS_GROUP = "PTAUHZ2E6Z.SpotifyWebAPI.com.seantfitzgerald.Tunetag"
 
 let AWS_LAMBDA_GET_TOKENS_FUNCTION_NAME = "SpotifyProxyGetTokens"
 let AWS_LAMBDA_REFRESH_TOKENS_FUNCTION_NAME = "SpotifyProxyTokenRefresh"
