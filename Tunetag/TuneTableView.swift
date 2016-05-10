@@ -9,21 +9,74 @@
 class TuneTableView: UITableView, UITableViewDataSource {
 
     //MARK: Instance Variables
-    // TODO: Cache the cover art to file with associated ISRC for offline use.
-    var coverArt = [UIImage]()
+    //FIX: this might become a memory hog with high volumes of music coverart. Limit to a thousand or so.
+    var coverArt = [UIImage?]()
     
     //MARK: Initializers
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         dataSource = self
+        Spotify.user.getUserData { (err:NSError?) in
+            assert(err == nil, err!.description)
+            self.reloadData()
+        }
+    }
+    
+    //MARK: View Lifecycle
+    
+    //MARK: Override
+    override func reloadData() {
+        if let savedTracks = Spotify.user.savedTracks {
+            coverArt = Array(count: savedTracks.count, repeatedValue: nil)
+        }
+        super.reloadData()
     }
     
     //MARK: TableView Datasource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if let trackCount = Spotify.user.savedTracks?.count {
+            return trackCount
+        } else {
+            return 0
+        }
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return UITableViewCell(style: .Default, reuseIdentifier: nil)
+        let track = Spotify.user.savedTracks?[indexPath.row]
+        if let cell = tableView.dequeueReusableCellWithIdentifier("track cell") {
+            return setupMusicTrackCell(cell, spotifyTrack: track, indexPath: indexPath)
+        } else {
+            let cell = UITableViewCell(style: .Default,
+                                       reuseIdentifier: "track cell")
+            return setupMusicTrackCell(cell, spotifyTrack: track, indexPath: indexPath)
+        }
     }
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    //MARK: Utilities
+    func setupMusicTrackCell(cell:UITableViewCell, spotifyTrack:SPTTrack? = nil, indexPath:NSIndexPath) -> UITableViewCell {
+        if let track = spotifyTrack {
+            cell.textLabel?.text = track.name
+            if let coverImage = coverArt[indexPath.row] {
+                cell.imageView?.image = coverImage
+            } else {
+                NSURLSession.sharedSession().dataTaskWithURL(
+                    track.album.smallestCover.imageURL,
+                    completionHandler: {(data, response, error)->Void in
+                        if let imageData = data {
+                            let coverImage = UIImage(data: imageData)
+                            self.coverArt[indexPath.row] = coverImage
+                            NSOperationQueue.mainQueue().addOperationWithBlock(){
+                                cell.imageView?.image = coverImage
+                                cell.setNeedsLayout()
+                            }
+                        }
+                }).resume()
+            }
+        }
+        return cell
+    }
+
 }

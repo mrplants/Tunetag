@@ -192,6 +192,7 @@
 		1406F9651CBB0AFF00885698 /* Tunetag */ = {
 			isa = PBXGroup;
 			children = (
+				1406F96A1CBB0AFF00885698 /* Main.storyboard */,
 				14A51F291CBB3C4B00F4E7A4 /* Data */,
 				14A51F281CBB3C4300F4E7A4 /* Logic */,
 				14A51F271CBB3C3C00F4E7A4 /* Media */,
@@ -223,6 +224,8 @@
 				1475AC571CD6BC5100B7A65B /* Services */,
 				1475AC561CD6BC4200B7A65B /* Keychain */,
 				1406F9661CBB0AFF00885698 /* AppDelegate.swift */,
+				1475AC411CC8400300B7A65B /* Extensions.swift */,
+				1406F99A1CBB116B00885698 /* Tunetag-Bridging-Header.h */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 		14A51F281CBB3C4300F4E7A4 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				14A51F241CBB2A5500F4E7A4 /* Constants.swift */,
 				1475AC451CCAE98E00B7A65B /* Utilities */,
 				14A51F2A1CBB3C7A00F4E7A4 /* CoreData */,
 				14A51F261CBB3C2A00F4E7A4 /* UI */,
@@ -278,13 +282,9 @@
 			isa = PBXGroup;
 			children = (
 				1475AC551CD669DA00B7A65B /* Tunetag.entitlements */,
-				14A51F241CBB2A5500F4E7A4 /* Constants.swift */,
-				1406F96A1CBB0AFF00885698 /* Main.storyboard */,
 				1406F9721CBB0AFF00885698 /* LaunchScreen.storyboard */,
 				1406F96D1CBB0AFF00885698 /* TunetagModel.xcdatamodeld */,
 				1406F9751CBB0AFF00885698 /* Info.plist */,
-				1406F99A1CBB116B00885698 /* Tunetag-Bridging-Header.h */,
-				1475AC411CC8400300B7A65B /* Extensions.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -658,7 +658,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tunetag/Tunetag-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -683,7 +683,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.seantfitzgerald.Tunetag;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tunetag/Tunetag-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

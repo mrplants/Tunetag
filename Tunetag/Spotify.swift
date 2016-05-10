@@ -146,7 +146,7 @@ class Spotify {
                                 let responseObject = response?.payloadJSONObject() as! [String:AnyObject]
                                 self.accessToken.value = responseObject["access_token"] as? String
                                 self.accessToken.expirationDate = NSDate.init(timeInterval: responseObject["expires_in"] as! NSTimeInterval, sinceDate: NSDate())
-                                self.refreshToken.value = responseObject["refresh_token"] as? String
+//                                self.refreshToken.value = responseObject["refresh_token"] as? String
                                 // Finished refreshing access token.
                                 callback(error: nil)
                             } else {
@@ -176,12 +176,11 @@ class Spotify {
                                     if self.savedTracks == nil {
                                         self.savedTracks = [SPTSavedTrack]()
                                     }
-                                    self.processTrackList(listPage) { (track:SPTSavedTrack)->Void in
+                                    self.processTrackList(listPage,recurse: { (track:SPTSavedTrack)->Void in
                                         if self.savedTracks != nil && !self.savedTracks!.contains({ $0.identifier == track.identifier }) {
                                             self.savedTracks?.append(track)
                                         }
-                                    }
-                                    callback(error: nil)
+                                    }, callback: callback)
                                 } else {
                                     callback(error: tracksError)
                                 }
@@ -195,22 +194,24 @@ class Spotify {
     }
     
     //MARK: Private Instance Methods
-    func processTrackList(listPage:SPTListPage, callback:(track:SPTSavedTrack)->Void) {
+    func processTrackList(listPage:SPTListPage, recurse:(track:SPTSavedTrack)->Void, callback:(err:NSError?) -> Void) {
         checkAuthenticationAndExpirationWithRefresh({(authError:NSError?) in
             // Spotify user authenticated and access token refreshed
             // Recursive function to process list pages
             if let items = listPage.items as? [SPTSavedTrack] {
                 for track:SPTSavedTrack in items {
-                    callback(track: track)
+                    recurse(track: track)
                 }
                 if listPage.hasNextPage {
                     listPage.requestNextPageWithAccessToken(self.accessToken.value!, callback: {(err:NSError!, obj:AnyObject!) -> Void in
                         if err == nil {
-                            self.processTrackList((obj as! SPTListPage), callback: callback)
+                            self.processTrackList((obj as! SPTListPage), recurse: recurse, callback: callback)
                         } else {
-                            NSLog(err.description)
+                            callback(err: err)
                         }
                     })
+                } else {
+                    callback(err: nil)
                 }
             }
         })

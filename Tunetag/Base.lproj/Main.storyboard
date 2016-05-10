@@ -1,56 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CKZ-dd-GC5">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Tune ManagerVC-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Tab Bar Controller-->
+        <scene sceneID="b3y-Oc-zWE">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="TuneManagerVC" customModule="Tunetag" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <tabBarController id="CKZ-dd-GC5" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="osG-6S-7Gg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="03P-yJ-SSQ" kind="relationship" relationship="viewControllers" id="gUf-RQ-Wov"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TQN-BC-DZb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-410" y="-173"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="CaN-Zq-3n8">
+            <objects>
+                <tableViewController id="03P-yJ-SSQ" customClass="TuneManagerVC" customModule="Tunetag" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ea8-Vs-MMd" customClass="TuneTableView" customModule="Tunetag" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5h-Hf-m0O">
-                                <rect key="frame" x="237" y="20" width="126" height="30"/>
-                                <state key="normal" title="Refresh Music List"/>
-                                <connections>
-                                    <action selector="refreshMusicList" destination="BYZ-38-t0r" eventType="touchUpInside" id="iqq-PD-peJ"/>
-                                </connections>
-                            </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="waT-7G-7Ea">
-                                <rect key="frame" x="0.0" y="58" width="600" height="542"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="dJv-ds-gDg"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="85f-g4-J2M"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="b5h-Hf-m0O" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="3dQ-CC-QIv"/>
-                            <constraint firstItem="waT-7G-7Ea" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="9Vq-2N-Emj"/>
-                            <constraint firstItem="b5h-Hf-m0O" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DoD-lj-LYZ"/>
-                            <constraint firstItem="waT-7G-7Ea" firstAttribute="top" secondItem="b5h-Hf-m0O" secondAttribute="bottom" constant="8" id="EmM-MK-71q"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="waT-7G-7Ea" secondAttribute="bottom" id="Lu0-HI-5Ba"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="waT-7G-7Ea" secondAttribute="trailing" constant="-20" id="wVa-jz-5JS"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="tuneTable" destination="waT-7G-7Ea" id="PN1-Uq-YaG"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Tune Cell" id="dNr-Ts-DFg">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dNr-Ts-DFg" id="F3q-o5-tCi">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="delegate" destination="03P-yJ-SSQ" id="qBj-og-iTR"/>
+                        </connections>
+                    </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="bHd-w2-DZk"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="rkb-nO-vQ1">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <attributedString key="attributedTitle">
+                            <fragment content="Get fresh tunes?">
+                                <attributes>
+                                    <font key="NSFont" metaFont="smallSystem"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                    </refreshControl>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gb9-XY-1yy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="237" y="233"/>
+            <point key="canvasLocation" x="437" y="-474"/>
         </scene>
     </scenes>
 </document>
