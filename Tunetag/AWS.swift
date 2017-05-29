@@ -10,24 +10,24 @@ import Foundation
 
 class AWS {
     static let user = AWS()
-    let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast1,
+    let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.usEast1,
                                                             identityPoolId:"us-east-1:651a9480-6172-4ab5-82ce-0c8272960212")
     
-    func login(callback:(task:AWSTask!) -> AnyObject!) {
+    func login(_ callback:@escaping (_ task:AWSTask<AnyObject>?) -> AnyObject!) {
         
-        let configuration = AWSServiceConfiguration(region:.USEast1, credentialsProvider:credentialsProvider)
+        let configuration = AWSServiceConfiguration(region:.usEast1, credentialsProvider:credentialsProvider)
         
-        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
         
         // Need to get the Cognito ID before setting up Spotify authentication
-        credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+        credentialsProvider?.getIdentityId()?.continue( { (task: AWSTask!) -> AnyObject! in
             if (task.error != nil) {
-                NSLog("Error: " + task.error!.localizedDescription)
-                return task.error
+                print("Error: \(task.error!.localizedDescription)")
+                return task.error as AnyObject
             }
             else {
-                return callback(task:task)
+                return callback(task)
             }
-        }
+        })
     }
 }

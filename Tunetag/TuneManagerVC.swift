@@ -16,7 +16,7 @@ class TuneManagerVC: UITableViewController {
         super.viewDidLoad()
         
         // Setup the table refresh control
-        self.refreshControl?.addTarget(self, action: #selector(self.refreshTunes), forControlEvents: .ValueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(self.refreshTunes), for: .valueChanged)
     }
         
     // MARK: Actions/Selectors

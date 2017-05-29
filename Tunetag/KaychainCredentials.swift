@@ -10,7 +10,7 @@ import Foundation
 
 class KeychainCredentials: KeychainItem {
     override init() {
-        NSLog("Class KeychainCredentials not implemented")
+        print("Class KeychainCredentials not implemented")
         assert(false)
     }
 }

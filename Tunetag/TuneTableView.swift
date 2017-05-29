@@ -28,47 +28,47 @@ class TuneTableView: UITableView, UITableViewDataSource {
     //MARK: Override
     override func reloadData() {
         if let savedTracks = Spotify.user.savedTracks {
-            coverArt = Array(count: savedTracks.count, repeatedValue: nil)
+            coverArt = Array(repeating: nil, count: savedTracks.count)
         }
         super.reloadData()
     }
     
     //MARK: TableView Datasource
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let trackCount = Spotify.user.savedTracks?.count {
             return trackCount
         } else {
             return 0
         }
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let track = Spotify.user.savedTracks?[indexPath.row]
-        if let cell = tableView.dequeueReusableCellWithIdentifier("track cell") {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "track cell") {
             return setupMusicTrackCell(cell, spotifyTrack: track, indexPath: indexPath)
         } else {
-            let cell = UITableViewCell(style: .Default,
+            let cell = UITableViewCell(style: .default,
                                        reuseIdentifier: "track cell")
             return setupMusicTrackCell(cell, spotifyTrack: track, indexPath: indexPath)
         }
     }
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     //MARK: Utilities
-    func setupMusicTrackCell(cell:UITableViewCell, spotifyTrack:SPTTrack? = nil, indexPath:NSIndexPath) -> UITableViewCell {
+    func setupMusicTrackCell(_ cell:UITableViewCell, spotifyTrack:SPTTrack? = nil, indexPath:IndexPath) -> UITableViewCell {
         if let track = spotifyTrack {
             cell.textLabel?.text = track.name
             if let coverImage = coverArt[indexPath.row] {
                 cell.imageView?.image = coverImage
             } else {
-                NSURLSession.sharedSession().dataTaskWithURL(
-                    track.album.smallestCover.imageURL,
+                URLSession.shared.dataTask(
+                    with: track.album.smallestCover.imageURL,
                     completionHandler: {(data, response, error)->Void in
                         if let imageData = data {
                             let coverImage = UIImage(data: imageData)
                             self.coverArt[indexPath.row] = coverImage
-                            NSOperationQueue.mainQueue().addOperationWithBlock(){
+                            OperationQueue.main.addOperation(){
                                 cell.imageView?.image = coverImage
                                 cell.setNeedsLayout()
                             }

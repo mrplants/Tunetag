@@ -13,53 +13,53 @@ class Spotify {
     
     //MARK: Type Variables
     static var user = Spotify()
-    class var scopesRequestURL:NSURL {
+    class var scopesRequestURL:URL {
         get {
             // Create the Spotify login URL to request access to scopes
-            let spotifyScopeRequestURLComponents = NSURLComponents()
+            var spotifyScopeRequestURLComponents = URLComponents()
             spotifyScopeRequestURLComponents.queryItems = [
-                NSURLQueryItem.init(name: "client_id", value: SPOTIFY_CLIENT_ID),
-                NSURLQueryItem.init(name: "response_type", value: "code"),
-                NSURLQueryItem.init(name: "redirect_uri", value: SPOTIFY_AUTH_REDIRECT_URL),
-                NSURLQueryItem.init(name: "scope", value: SPOTIFY_AUTH_SCOPES),
-                NSURLQueryItem.init(name: "state", value: SPOTIFY_SCOPE_AUTH_STATE),
+                URLQueryItem.init(name: "client_id", value: SPOTIFY_CLIENT_ID),
+                URLQueryItem.init(name: "response_type", value: "code"),
+                URLQueryItem.init(name: "redirect_uri", value: SPOTIFY_AUTH_REDIRECT_URL),
+                URLQueryItem.init(name: "scope", value: SPOTIFY_AUTH_SCOPES),
+                URLQueryItem.init(name: "state", value: SPOTIFY_SCOPE_AUTH_STATE),
                 //NSURLQueryItem.init(name: "show_dialog", value: "true")
             ]
             spotifyScopeRequestURLComponents.host = "authorize"
             spotifyScopeRequestURLComponents.scheme = "spotify-action"
-            return spotifyScopeRequestURLComponents.URL!
+            return spotifyScopeRequestURLComponents.url!
         }
     }
     //MARK: Type Methods
-    class func login(code:String, callback:(error:NSError?)->Void={_ in }) {
+    class func login(_ code:String, callback:@escaping (_ error:NSError?)->Void={_ in }) {
         // Use the response code to get access and refresh tokens using AWS Lambda
         let spotifyTokenRequest = AWSLambdaInvocationRequest()
-        spotifyTokenRequest.functionName = AWS_LAMBDA_GET_TOKENS_FUNCTION_NAME
+        spotifyTokenRequest?.functionName = AWS_LAMBDA_GET_TOKENS_FUNCTION_NAME
         let payload = ["code" : code]
         do {
-            try spotifyTokenRequest.payload = NSJSONSerialization.aws_dataWithJSONObject(payload, options: .PrettyPrinted)
-            AWSLambda.defaultLambda().invoke(
-                spotifyTokenRequest,
+            try spotifyTokenRequest?.payload = JSONSerialization.aws_data(withJSONObject: payload, options: .prettyPrinted)
+            AWSLambda.default().invoke(
+                spotifyTokenRequest!,
                 completionHandler: {(response, err) -> Void in
                     if err == nil {
                         if let responseObject = response?.payloadJSONObject() as? [String:AnyObject] {
                             if let tempAccessToken = responseObject["access_token"] as? String {
                                 if let tempRefreshToken = responseObject["refresh_token"] as? String {
-                                    if let tempTimeInterval =  responseObject["expires_in"] as? NSTimeInterval {
-                                        let tempExpirationDate = NSDate.init(timeInterval:tempTimeInterval, sinceDate: NSDate())
+                                    if let tempTimeInterval =  responseObject["expires_in"] as? TimeInterval {
+                                        let tempExpirationDate = Date.init(timeInterval:tempTimeInterval, since: Date())
                                         // Correct expected response
                                         // Securely persist credentials
                                         // Store expiration date as an attribute of the access key
                                         Keychain.storeSecureItem(
-                                            tempAccessToken.dataUsingEncoding(NSUTF8StringEncoding)!,
+                                            tempAccessToken.data(using: String.Encoding.utf8)!,
                                             service: SPOTIFY_ACCESS_TOKEN,
                                             accessGroup: SPOTIFY_WEB_API_ACCESS_GROUP)
                                         Keychain.storeSecureItemAttribute(
-                                            NSKeyedArchiver.archivedDataWithRootObject(tempExpirationDate),
+                                            NSKeyedArchiver.archivedData(withRootObject: tempExpirationDate),
                                             service: SPOTIFY_ACCESS_TOKEN,
                                             accessGroup: SPOTIFY_WEB_API_ACCESS_GROUP)
                                         Keychain.storeSecureItem(
-                                            tempRefreshToken.dataUsingEncoding(NSUTF8StringEncoding)!,
+                                            tempRefreshToken.data(using: String.Encoding.utf8)!,
                                             service: SPOTIFY_REFRESH_TOKEN,
                                             accessGroup: SPOTIFY_WEB_API_ACCESS_GROUP)
                                     }
@@ -68,17 +68,17 @@ class Spotify {
                         }
                         // Refresh local Spotify data with new credentials
                         Spotify.user.getUserData()
-                        callback(error: nil)
+                        callback(nil)
                     } else {
-                        callback(error: err)
+                        callback(err as! NSError)
                     }
             })
         } catch {
-            callback(error: NSError(domain:"Error while serializing JSON Data for AWS", code: 0, userInfo: nil));
+            callback(NSError(domain:"Error while serializing JSON Data for AWS", code: 0, userInfo: nil));
         }
         
     }
-    private init() {
+    fileprivate init() {
         accessToken = KeychainToken(service: SPOTIFY_ACCESS_TOKEN, accessGroup: SPOTIFY_WEB_API_ACCESS_GROUP)
         refreshToken = KeychainToken(service: SPOTIFY_REFRESH_TOKEN, accessGroup: SPOTIFY_WEB_API_ACCESS_GROUP)
         if authenticated {
@@ -109,7 +109,7 @@ class Spotify {
     var accessTokenExpired: Bool {
         get {
             if !authenticated {
-                NSLog("User not logged in. No tokens available.")
+                print("User not logged in. No tokens available.")
                 return true
             } else {
                 return self.accessToken.isExpired
@@ -118,127 +118,127 @@ class Spotify {
     }
     
     //MARK: Private Instance Variables
-    private var spotifyUser:SPTUser?
-    private var accessToken:KeychainToken
-    private var refreshToken:KeychainToken
+    fileprivate var spotifyUser:SPTUser?
+    fileprivate var accessToken:KeychainToken
+    fileprivate var refreshToken:KeychainToken
     
     //MARK: Public Instance Methods
-    func refreshAccessToken(callback:(error:NSError?)->Void={_ in }) {
+    func refreshAccessToken(_ callback:@escaping (_ error:NSError?)->Void={_ in }) {
         // Check if authenticated
         if !authenticated {
-            callback(error: NSError(domain: "Spotify user not authenticated", code: 0, userInfo: nil))
+            callback(NSError(domain: "Spotify user not authenticated", code: 0, userInfo: nil))
         } else {
             // Check if the access token is  expired
             if !accessTokenExpired {
-                callback(error: nil)
+                callback(nil)
             } else {
                 // Get another access token from Spotify through AWS.
                 let spotifyTokenRequest = AWSLambdaInvocationRequest()
-                spotifyTokenRequest.functionName = AWS_LAMBDA_REFRESH_TOKENS_FUNCTION_NAME
+                spotifyTokenRequest?.functionName = AWS_LAMBDA_REFRESH_TOKENS_FUNCTION_NAME
                 // User is authenticated, so it is safe to explicitly unwrap 'refreshToken'
                 let payload = ["refreshToken" : refreshToken.value!]
                 do {
-                    try spotifyTokenRequest.payload = NSJSONSerialization.aws_dataWithJSONObject(payload, options: .PrettyPrinted)
-                    AWSLambda.defaultLambda().invoke(
-                        spotifyTokenRequest,
+                    try spotifyTokenRequest?.payload = JSONSerialization.aws_data(withJSONObject: payload, options: .prettyPrinted)
+                    AWSLambda.default().invoke(
+                        spotifyTokenRequest!,
                         completionHandler: {(response, err) -> Void in
                             if err == nil {
                                 let responseObject = response?.payloadJSONObject() as! [String:AnyObject]
                                 self.accessToken.value = responseObject["access_token"] as? String
-                                self.accessToken.expirationDate = NSDate.init(timeInterval: responseObject["expires_in"] as! NSTimeInterval, sinceDate: NSDate())
+                                self.accessToken.expirationDate = Date.init(timeInterval: responseObject["expires_in"] as! TimeInterval, since: Date())
 //                                self.refreshToken.value = responseObject["refresh_token"] as? String
                                 // Finished refreshing access token.
-                                callback(error: nil)
+                                callback(nil)
                             } else {
-                                callback(error:err);
+                                callback(err as! NSError);
                             }
                     })
                 } catch {
-                    callback(error: NSError(domain: "Error while serializing JSON Data for AWS", code: 0, userInfo: nil));
+                    callback(NSError(domain: "Error while serializing JSON Data for AWS", code: 0, userInfo: nil));
                 }
             }
         }
     }
-    func getUserData(callback:(error:NSError?)->Void={_ in }) -> Void {
+    func getUserData(_ callback:@escaping (_ error:NSError?)->Void={_ in }) -> Void {
         checkAuthenticationAndExpirationWithRefresh({ (authRefreshError:NSError?) in
             if authRefreshError != nil {
-                callback(error: authRefreshError)
+                callback(authRefreshError)
             } else {
                 // Spotify user authenticated and access token refreshed
                 // Get the Spotify user attributes
-                SPTUser.requestCurrentUserWithAccessToken(self.accessToken.value,
+                SPTUser.requestCurrentUser(withAccessToken: self.accessToken.value,
                     callback: {(userError:NSError!, obj:AnyObject!) -> Void in
                         if userError == nil {
                             self.spotifyUser = obj as? SPTUser
-                            SPTYourMusic.savedTracksForUserWithAccessToken(self.accessToken.value!, callback: {(tracksError:NSError!, obj:AnyObject!) -> Void in
+                            SPTYourMusic.savedTracksForUser(withAccessToken: self.accessToken.value!, callback: {(tracksError:NSError!, obj:AnyObject!) -> Void in
                                 if tracksError == nil {
                                     let listPage = obj as! SPTListPage
                                     if self.savedTracks == nil {
                                         self.savedTracks = [SPTSavedTrack]()
                                     }
                                     self.processTrackList(listPage,recurse: { (track:SPTSavedTrack)->Void in
-                                        if self.savedTracks != nil && !self.savedTracks!.contains({ $0.identifier == track.identifier }) {
+                                        if self.savedTracks != nil && !self.savedTracks!.contains(where: { $0.identifier == track.identifier }) {
                                             self.savedTracks?.append(track)
                                         }
                                     }, callback: callback)
                                 } else {
-                                    callback(error: tracksError)
+                                    callback(tracksError)
                                 }
-                            })
+                            } as! SPTRequestCallback)
                         } else {
-                            callback(error: userError)
+                            callback(userError)
                         }
-                })
+                } as! SPTRequestCallback)
             }
         })
     }
     
     //MARK: Private Instance Methods
-    func processTrackList(listPage:SPTListPage, recurse:(track:SPTSavedTrack)->Void, callback:(err:NSError?) -> Void) {
+    func processTrackList(_ listPage:SPTListPage, recurse:@escaping (_ track:SPTSavedTrack)->Void, callback:@escaping (_ err:NSError?) -> Void) {
         checkAuthenticationAndExpirationWithRefresh({(authError:NSError?) in
             // Spotify user authenticated and access token refreshed
             // Recursive function to process list pages
             if let items = listPage.items as? [SPTSavedTrack] {
                 for track:SPTSavedTrack in items {
-                    recurse(track: track)
+                    recurse(track)
                 }
                 if listPage.hasNextPage {
-                    listPage.requestNextPageWithAccessToken(self.accessToken.value!, callback: {(err:NSError!, obj:AnyObject!) -> Void in
+                    listPage.requestNextPage(withAccessToken: self.accessToken.value!, callback: {(err:NSError!, obj:AnyObject!) -> Void in
                         if err == nil {
                             self.processTrackList((obj as! SPTListPage), recurse: recurse, callback: callback)
                         } else {
-                            callback(err: err)
+                            callback(err)
                         }
-                    })
+                    } as! SPTRequestCallback)
                 } else {
-                    callback(err: nil)
+                    callback(nil)
                 }
             }
         })
     }
     
-    func checkAuthenticationAndExpirationWithRefresh(callback:(error:NSError?)->Void) {
+    func checkAuthenticationAndExpirationWithRefresh(_ callback:@escaping (_ error:NSError?)->Void) {
         // Check authentication and expiration
         if !authenticated {
-            callback(error: NSError(domain: "Spotify user not authenticated", code: 0, userInfo: nil))
+            callback(NSError(domain: "Spotify user not authenticated", code: 0, userInfo: nil))
         } else if accessTokenExpired {
             // Try once to refresh the access token
             self.refreshAccessToken({(err:NSError?) in
                 if err != nil {
                     // Check if token is still expired
                     if !self.accessTokenExpired {
-                        callback(error: nil)
+                        callback(nil)
                     } else {
                         // There's an error refreshing token data
-                        callback(error: NSError(domain: "Spotify access token expired and cannot refresh.", code: 0, userInfo: nil))
+                        callback(NSError(domain: "Spotify access token expired and cannot refresh.", code: 0, userInfo: nil))
                     }
                 } else {
-                    callback(error: err)
+                    callback(err)
                 }
             })
         } else {
             // Authenticated and not expired
-            callback(error: nil)
+            callback(nil)
         }
     }
 }

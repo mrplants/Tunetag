@@ -9,26 +9,26 @@
 import Foundation
 
 extension AWSLambdaInvocationResponse {
-    func payloadJSONObject() -> AnyObject? {
-        // Converts payload buffer into JSON object
-        var payloadString = ""
-        for characterValue in (self.payload?["data"] as! [Int]) {
-            payloadString.append(Character(UnicodeScalar(characterValue)))
-        }
-        // Attempts to convert string into JSON object
-        do {
-            let awsJSONPayload = try NSJSONSerialization.JSONObjectWithData(payloadString.dataUsingEncoding(NSUTF8StringEncoding)!, options: [])
-            return awsJSONPayload
-        } catch {
-            return nil
-        }
-    }
+	func payloadJSONObject() -> AnyObject? {
+		// Converts payload buffer into JSON object
+		var payloadString = ""
+		for characterValue in ((self.payload as! Dictionary<String, [Int]>)["data"]!) {
+			payloadString.append(Character(UnicodeScalar(characterValue)!))
+		}
+		// Attempts to convert string into JSON object
+		do {
+			let awsJSONPayload = try JSONSerialization.jsonObject(with: payloadString.data(using: String.Encoding.utf8)!, options: [])
+			return awsJSONPayload as AnyObject
+		} catch {
+			return nil
+		}
+	}
 }
 
 extension CFString {
-    var voidPointerCString:UnsafePointer<()> {
-        get{
-            return UnsafePointer(CFStringGetCStringPtr(self, CFStringBuiltInEncodings.UTF8.rawValue))
-        }
-    }
+	var voidPointerCString:UnsafeRawPointer {
+		get{
+			return UnsafeRawPointer(CFStringGetCStringPtr(self, CFStringBuiltInEncodings.UTF8.rawValue))
+		}
+	}
 }
