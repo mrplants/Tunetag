@@ -12,8 +12,8 @@ extension AWSLambdaInvocationResponse {
 	func payloadJSONObject() -> AnyObject? {
 		// Converts payload buffer into JSON object
 		var payloadString = ""
-		for characterValue in ((self.payload as! Dictionary<String, [Int]>)["data"]!) {
-			payloadString.append(Character(UnicodeScalar(characterValue)!))
+		for characterValue in ((self.payload as! NSDictionary)["data"] as! NSArray) {
+			payloadString.append(Character(UnicodeScalar(characterValue as! Int)!))
 		}
 		// Attempts to convert string into JSON object
 		do {

@@ -73,7 +73,7 @@ class Spotify {
 						// Refresh local Spotify data with new credentials
 						Spotify.user.getUserData()
 					} else {
-						print("Error while invoking AWS lambda function: \(err.debugDescription)")
+						print("Error while invoking AWS lambda function: \((err! as NSError).userInfo)")
 					}
 					callback();
 			})
@@ -166,69 +166,74 @@ class Spotify {
 		}
 	}
 	func getUserData(_ callback:@escaping ()->Void={_ in }) -> Void {
-		checkAuthenticationAndExpirationWithRefresh({() in
-			
-			// Spotify user authenticated and access token refreshed
-			// Get the Spotify user attributes
-			SPTUser.requestCurrentUser(withAccessToken: self.accessToken.value,
-			                           callback: {(userError:NSError!, obj:AnyObject!) -> Void in
-																	if userError == nil {
-																		self.spotifyUser = obj as? SPTUser
-																		SPTYourMusic.savedTracksForUser(withAccessToken: self.accessToken.value!, callback: {(tracksError:NSError!, obj:AnyObject!) -> Void in
-																			if tracksError == nil {
-																				let listPage = obj as! SPTListPage
-																				if self.savedTracks == nil {
-																					self.savedTracks = [SPTSavedTrack]()
-																				}
-																				self.processTrackList(listPage,recurse: { (track:SPTSavedTrack)->Void in
-																					if self.savedTracks != nil && !self.savedTracks!.contains(where: { $0.identifier == track.identifier }) {
-																						self.savedTracks?.append(track)
-																					}
-																				}, callback: callback)
-																			} else {
-																				print("Error while requesting Spotify user's saved tracks.")
-																				callback()
-																			}
-																			} as! SPTRequestCallback)
-																	} else {
-																		print("Error while requesting current Spotify user")
-																		callback()
-																	}
-																	} as! SPTRequestCallback)
+		checkAuthenticationAndExpirationWithRefresh({(authCheckOkay:Bool) in
+			if authCheckOkay {
+				// Spotify user authenticated and access token refreshed
+				// Get the Spotify user attributes
+				SPTUser.requestCurrentUser(withAccessToken: self.accessToken.value,
+				                           callback:
+					{(userError:Error?, obj:Any?) -> Void in
+						if userError == nil {
+							self.spotifyUser = obj as? SPTUser
+							SPTYourMusic.savedTracksForUser(withAccessToken: self.accessToken.value!, callback:
+								{(tracksError:Error?, obj:Any!) -> Void in
+									if tracksError == nil {
+										let listPage = obj as! SPTListPage
+										if self.savedTracks == nil {
+											self.savedTracks = [SPTSavedTrack]()
+										}
+										self.processTrackList(listPage,recurse: { (track:SPTSavedTrack)->Void in
+											if self.savedTracks != nil && !self.savedTracks!.contains(where: { $0.identifier == track.identifier }) {
+												self.savedTracks?.append(track)
+											}
+										}, callback: callback)
+									} else {
+										print("Error while requesting Spotify user's saved tracks.")
+										callback()
+									}
+							})
+						} else {
+							print("Error while requesting current Spotify user")
+							callback()
+						}
+				})
+			}
 		})
 	}
 	
 	//MARK: Private Instance Methods
 	func processTrackList(_ listPage:SPTListPage, recurse:@escaping (_ track:SPTSavedTrack)->Void, callback:@escaping () -> Void) {
-		checkAuthenticationAndExpirationWithRefresh({() in
-			// Spotify user authenticated and access token refreshed
-			// Recursive function to process list pages
-			if let items = listPage.items as? [SPTSavedTrack] {
-				for track:SPTSavedTrack in items {
-					recurse(track)
-				}
-				if listPage.hasNextPage {
-					listPage.requestNextPage(withAccessToken: self.accessToken.value!, callback: {(err:NSError!, obj:AnyObject!) -> Void in
-						if err == nil {
-							self.processTrackList((obj as! SPTListPage), recurse: recurse, callback: callback)
-						} else {
-							print("Error while requesting next page of tracks from Spotify.")
-							callback()
-						}
-						} as! SPTRequestCallback)
-				} else {
-					callback()
+		checkAuthenticationAndExpirationWithRefresh({(authCheckOkay:Bool) in
+			if authCheckOkay {
+				// Spotify user authenticated and access token refreshed
+				// Recursive function to process list pages
+				if let items = listPage.items as? [SPTSavedTrack] {
+					for track:SPTSavedTrack in items {
+						recurse(track)
+					}
+					if listPage.hasNextPage {
+						listPage.requestNextPage(withAccessToken: self.accessToken.value!, callback:
+							{(err:Error?, obj:Any?) -> Void in
+								if err == nil {
+									self.processTrackList((obj as! SPTListPage), recurse: recurse, callback: callback)
+								} else {
+									print("Error while requesting next page of tracks from Spotify.")
+									callback()
+								}
+						})
+					} else {
+						callback()
+					}
 				}
 			}
 		})
-	
 	}
 	
-	func checkAuthenticationAndExpirationWithRefresh(_ callback:@escaping ()->Void) {
+	func checkAuthenticationAndExpirationWithRefresh(_ callback:@escaping (_ authCheckOkay:Bool)->Void) {
 		// Check authentication and expiration
 		if !authenticated {
 			print("Spotify user not authenticated")
-			callback()
+			callback(false)
 		} else if accessTokenExpired {
 			// Try once to refresh the access token
 			self.refreshAccessToken({() in
@@ -237,9 +242,15 @@ class Spotify {
 					// Token still expired
 					// There's an error refreshing token data
 					print("Spotify access token expired and cannot refresh.")
+					callback(false)
+				} else {
+					// User authenticated and token refreshed.
+					callback(true)
 				}
-				callback()
 			})
+		} else {
+			// User authenticated and token not expired.
+			callback(true)
 		}
 	}
 }
