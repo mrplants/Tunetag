@@ -18,11 +18,9 @@
 		1406F9A61CBB132300885698 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1406F9A51CBB132300885698 /* Tag.swift */; };
 		1406F9A81CBB13F500885698 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1406F9A71CBB13F500885698 /* Genre.swift */; };
 		1406F9B01CBB17B900885698 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1406F9AF1CBB17B900885698 /* AVFoundation.framework */; };
-		1406F9B21CBB17FC00885698 /* Spotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1406F9B11CBB17FC00885698 /* Spotify.framework */; };
 		1475AC421CC8400300B7A65B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC411CC8400300B7A65B /* Extensions.swift */; };
 		1475AC441CCAE97300B7A65B /* Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC431CCAE97300B7A65B /* Spotify.swift */; };
 		1475AC471CCC8C8F00B7A65B /* AWS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC461CCC8C8F00B7A65B /* AWS.swift */; };
-		1475AC491CCF0E5A00B7A65B /* TuneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC481CCF0E5A00B7A65B /* TuneTableView.swift */; };
 		1475AC4B1CD4F71900B7A65B /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC4A1CD4F71900B7A65B /* Keychain.swift */; };
 		1475AC4D1CD4FEB900B7A65B /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC4C1CD4FEB900B7A65B /* KeychainItem.swift */; };
 		1475AC4F1CD4FF1C00B7A65B /* KeychainToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AC4E1CD4FF1C00B7A65B /* KeychainToken.swift */; };
@@ -49,6 +47,12 @@
 		14A51FC81CC410A100F4E7A4 /* AWSCognito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FC71CC410A100F4E7A4 /* AWSCognito.framework */; };
 		14A51FCA1CC410C700F4E7A4 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FC91CC410C700F4E7A4 /* libsqlite3.tbd */; };
 		14A51FCC1CC410CD00F4E7A4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A51FCB1CC410CD00F4E7A4 /* libz.tbd */; };
+		14FAE9741EDD219C004D3FF0 /* CoverArtTransformViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FAE9731EDD219C004D3FF0 /* CoverArtTransformViewController.swift */; };
+		14FAE9761EDD23B1004D3FF0 /* TrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FAE9751EDD23B1004D3FF0 /* TrackTableViewCell.swift */; };
+		14FAE9801EDD2FCA004D3FF0 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FAE97D1EDD2FCA004D3FF0 /* SpotifyAudioPlayback.framework */; };
+		14FAE9811EDD2FCA004D3FF0 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FAE97E1EDD2FCA004D3FF0 /* SpotifyAuthentication.framework */; };
+		14FAE9821EDD2FCA004D3FF0 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FAE97F1EDD2FCA004D3FF0 /* SpotifyMetadata.framework */; };
+		14FAE9841EDD3597004D3FF0 /* BridgingAudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FAE9831EDD3597004D3FF0 /* BridgingAudioController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,11 +91,9 @@
 		1406F9A51CBB132300885698 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		1406F9A71CBB13F500885698 /* Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		1406F9AF1CBB17B900885698 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		1406F9B11CBB17FC00885698 /* Spotify.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Spotify.framework; sourceTree = "<group>"; };
 		1475AC411CC8400300B7A65B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1475AC431CCAE97300B7A65B /* Spotify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spotify.swift; sourceTree = "<group>"; };
 		1475AC461CCC8C8F00B7A65B /* AWS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWS.swift; sourceTree = "<group>"; };
-		1475AC481CCF0E5A00B7A65B /* TuneTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TuneTableView.swift; sourceTree = "<group>"; };
 		1475AC4A1CD4F71900B7A65B /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		1475AC4C1CD4FEB900B7A65B /* KeychainItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItem.swift; sourceTree = "<group>"; };
 		1475AC4E1CD4FF1C00B7A65B /* KeychainToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainToken.swift; sourceTree = "<group>"; };
@@ -119,6 +121,12 @@
 		14A51FC71CC410A100F4E7A4 /* AWSCognito.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCognito.framework; path = frameworks/extras/AWSCognito.framework; sourceTree = "<group>"; };
 		14A51FC91CC410C700F4E7A4 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		14A51FCB1CC410CD00F4E7A4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		14FAE9731EDD219C004D3FF0 /* CoverArtTransformViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverArtTransformViewController.swift; sourceTree = "<group>"; };
+		14FAE9751EDD23B1004D3FF0 /* TrackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackTableViewCell.swift; sourceTree = "<group>"; };
+		14FAE97D1EDD2FCA004D3FF0 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
+		14FAE97E1EDD2FCA004D3FF0 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
+		14FAE97F1EDD2FCA004D3FF0 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
+		14FAE9831EDD3597004D3FF0 /* BridgingAudioController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgingAudioController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,11 +138,14 @@
 				14A51FCA1CC410C700F4E7A4 /* libsqlite3.tbd in Frameworks */,
 				14A51FC61CC4109200F4E7A4 /* AWSSQS.framework in Frameworks */,
 				14A51FB81CC4109100F4E7A4 /* AWSCloudWatch.framework in Frameworks */,
+				14FAE9821EDD2FCA004D3FF0 /* SpotifyMetadata.framework in Frameworks */,
 				14A51FC51CC4109100F4E7A4 /* AWSSNS.framework in Frameworks */,
 				14A51FBB1CC4109100F4E7A4 /* AWSEC2.framework in Frameworks */,
 				14A51FC31CC4109100F4E7A4 /* AWSSES.framework in Frameworks */,
 				14A51FB61CC4109100F4E7A4 /* AWSAPIGateway.framework in Frameworks */,
 				14A51FBF1CC4109100F4E7A4 /* AWSLambda.framework in Frameworks */,
+				14FAE9801EDD2FCA004D3FF0 /* SpotifyAudioPlayback.framework in Frameworks */,
+				14FAE9811EDD2FCA004D3FF0 /* SpotifyAuthentication.framework in Frameworks */,
 				14A51FBD1CC4109100F4E7A4 /* AWSIoT.framework in Frameworks */,
 				14A51FB71CC4109100F4E7A4 /* AWSAutoScaling.framework in Frameworks */,
 				14A51FBC1CC4109100F4E7A4 /* AWSElasticLoadBalancing.framework in Frameworks */,
@@ -144,7 +155,6 @@
 				1406F9B01CBB17B900885698 /* AVFoundation.framework in Frameworks */,
 				14A51FC81CC410A100F4E7A4 /* AWSCognito.framework in Frameworks */,
 				14A51FC41CC4109100F4E7A4 /* AWSSimpleDB.framework in Frameworks */,
-				1406F9B21CBB17FC00885698 /* Spotify.framework in Frameworks */,
 				14A51FBA1CC4109100F4E7A4 /* AWSDynamoDB.framework in Frameworks */,
 				14A51FB91CC4109100F4E7A4 /* AWSCore.framework in Frameworks */,
 				14A51FC21CC4109100F4E7A4 /* AWSS3.framework in Frameworks */,
@@ -246,6 +256,7 @@
 			children = (
 				1475AC461CCC8C8F00B7A65B /* AWS.swift */,
 				1475AC431CCAE97300B7A65B /* Spotify.swift */,
+				14FAE9831EDD3597004D3FF0 /* BridgingAudioController.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -253,8 +264,9 @@
 		14A51F261CBB3C2A00F4E7A4 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				1475AC481CCF0E5A00B7A65B /* TuneTableView.swift */,
+				14FAE9731EDD219C004D3FF0 /* CoverArtTransformViewController.swift */,
 				14A51F221CBB1ADB00F4E7A4 /* TuneManagerVC.swift */,
+				14FAE9751EDD23B1004D3FF0 /* TrackTableViewCell.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -304,6 +316,9 @@
 			children = (
 				14A51FCB1CC410CD00F4E7A4 /* libz.tbd */,
 				14A51FC91CC410C700F4E7A4 /* libsqlite3.tbd */,
+				14FAE97D1EDD2FCA004D3FF0 /* SpotifyAudioPlayback.framework */,
+				14FAE97E1EDD2FCA004D3FF0 /* SpotifyAuthentication.framework */,
+				14FAE97F1EDD2FCA004D3FF0 /* SpotifyMetadata.framework */,
 				14A51FC71CC410A100F4E7A4 /* AWSCognito.framework */,
 				14A51FA51CC4109100F4E7A4 /* AWSAPIGateway.framework */,
 				14A51FA61CC4109100F4E7A4 /* AWSAutoScaling.framework */,
@@ -323,7 +338,6 @@
 				14A51FB41CC4109100F4E7A4 /* AWSSNS.framework */,
 				14A51FB51CC4109100F4E7A4 /* AWSSQS.framework */,
 				1406F9AF1CBB17B900885698 /* AVFoundation.framework */,
-				1406F9B11CBB17FC00885698 /* Spotify.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -485,9 +499,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14FAE9841EDD3597004D3FF0 /* BridgingAudioController.swift in Sources */,
 				1406F9A41CBB124700885698 /* Tune.swift in Sources */,
-				1475AC491CCF0E5A00B7A65B /* TuneTableView.swift in Sources */,
 				1475AC4D1CD4FEB900B7A65B /* KeychainItem.swift in Sources */,
+				14FAE9741EDD219C004D3FF0 /* CoverArtTransformViewController.swift in Sources */,
 				1406F9A61CBB132300885698 /* Tag.swift in Sources */,
 				14A51F231CBB1ADB00F4E7A4 /* TuneManagerVC.swift in Sources */,
 				1475AC4F1CD4FF1C00B7A65B /* KeychainToken.swift in Sources */,
@@ -496,6 +511,7 @@
 				1475AC441CCAE97300B7A65B /* Spotify.swift in Sources */,
 				1475AC421CC8400300B7A65B /* Extensions.swift in Sources */,
 				1406F9A81CBB13F500885698 /* Genre.swift in Sources */,
+				14FAE9761EDD23B1004D3FF0 /* TrackTableViewCell.swift in Sources */,
 				14A51F251CBB2A5500F4E7A4 /* Constants.swift in Sources */,
 				1406F9671CBB0AFF00885698 /* AppDelegate.swift in Sources */,
 				1475AC511CD4FF2D00B7A65B /* KaychainCredentials.swift in Sources */,

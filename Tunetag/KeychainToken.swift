@@ -32,9 +32,9 @@ class KeychainToken: KeychainItem {
 					return _value
 				}
 			} catch KeychainError.itemNotFound {
-				print("No token stored in keychain.")
+				NSLog("No token stored in keychain.")
 			} catch {
-				print("Keychain error while getting token.")
+				NSLog("Keychain error while getting token.")
 			}
 			return nil
 		}
@@ -42,7 +42,7 @@ class KeychainToken: KeychainItem {
 			do {
 				try Keychain.storeSecureItem(token?.data(using: String.Encoding.utf8), service:service, accessGroup: accessGroup)
 			} catch {
-				print("Keychain error while storing token.")
+				NSLog("Keychain error while storing token.")
 			}
 		}
 	}
@@ -58,7 +58,7 @@ class KeychainToken: KeychainItem {
 					_expirationDate = nil
 				}
 			} catch {
-				print("Keychain error while getting token expiration date.")
+				NSLog("Keychain error while getting token expiration date.")
 			}
 			return _expirationDate
 		}
@@ -70,7 +70,7 @@ class KeychainToken: KeychainItem {
 					try Keychain.storeSecureItemAttribute(nil, service: service, accessGroup: accessGroup)
 				}
 			} catch {
-				print("Keychain error while storing token expiration date.")
+				NSLog("Keychain error while storing token expiration date.")
 			}
 		}
 	}

@@ -67,18 +67,18 @@ class Spotify {
 									service: SPOTIFY_REFRESH_TOKEN,
 									accessGroup: SPOTIFY_WEB_API_ACCESS_GROUP)
 							} catch {
-								print("Error while storing Spotify credentials to Keychain.")
+								NSLog("Error while storing Spotify credentials to Keychain.")
 							}
 						}
 						// Refresh local Spotify data with new credentials
 						Spotify.user.getUserData()
 					} else {
-						print("Error while invoking AWS lambda function: \((err! as NSError).userInfo)")
+						NSLog("Error while invoking AWS lambda function: \((err! as NSError).userInfo)")
 					}
 					callback();
 			})
 		} catch {
-			print("Error while serializing JSON Data for AWS")
+			NSLog("Error while serializing JSON Data for AWS")
 			callback();
 		}
 		
@@ -114,7 +114,7 @@ class Spotify {
 	var accessTokenExpired: Bool {
 		get {
 			if !authenticated {
-				print("User not logged in. No tokens available.")
+				NSLog("User not logged in. No tokens available.")
 				return true
 			} else {
 				return self.accessToken.isExpired
@@ -123,15 +123,15 @@ class Spotify {
 	}
 	
 	//MARK: Private Instance Variables
-	fileprivate var spotifyUser:SPTUser?
-	fileprivate var accessToken:KeychainToken
-	fileprivate var refreshToken:KeychainToken
+	var spotifyUser:SPTUser?
+	var accessToken:KeychainToken
+	var refreshToken:KeychainToken
 	
 	//MARK: Public Instance Methods
 	func refreshAccessToken(_ callback:@escaping ()->Void={_ in }) {
 		// Check if authenticated
 		if !authenticated {
-			print("Spotify user not authenticated")
+			NSLog("Spotify user not authenticated")
 		} else {
 			// Check if the access token is  expired
 			if !accessTokenExpired {
@@ -155,12 +155,12 @@ class Spotify {
 								// Finished refreshing access token.
 								callback()
 							} else {
-								print("Error refreshing Spotify access token: \(err.debugDescription)");
+								NSLog("Error refreshing Spotify access token: \(err.debugDescription)");
 								callback();
 							}
 					})
 				} catch {
-					print("Error while serializing JSON Data for AWS")
+					NSLog("Error while serializing JSON Data for AWS")
 				}
 			}
 		}
@@ -188,12 +188,12 @@ class Spotify {
 											}
 										}, callback: callback)
 									} else {
-										print("Error while requesting Spotify user's saved tracks.")
+										NSLog("Error while requesting Spotify user's saved tracks.")
 										callback()
 									}
 							})
 						} else {
-							print("Error while requesting current Spotify user")
+							NSLog("Error while requesting current Spotify user")
 							callback()
 						}
 				})
@@ -217,7 +217,7 @@ class Spotify {
 								if err == nil {
 									self.processTrackList((obj as! SPTListPage), recurse: recurse, callback: callback)
 								} else {
-									print("Error while requesting next page of tracks from Spotify.")
+									NSLog("Error while requesting next page of tracks from Spotify.")
 									callback()
 								}
 						})
@@ -232,7 +232,7 @@ class Spotify {
 	func checkAuthenticationAndExpirationWithRefresh(_ callback:@escaping (_ authCheckOkay:Bool)->Void) {
 		// Check authentication and expiration
 		if !authenticated {
-			print("Spotify user not authenticated")
+			NSLog("Spotify user not authenticated")
 			callback(false)
 		} else if accessTokenExpired {
 			// Try once to refresh the access token
@@ -241,7 +241,7 @@ class Spotify {
 				if self.accessTokenExpired {
 					// Token still expired
 					// There's an error refreshing token data
-					print("Spotify access token expired and cannot refresh.")
+					NSLog("Spotify access token expired and cannot refresh.")
 					callback(false)
 				} else {
 					// User authenticated and token refreshed.

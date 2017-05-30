@@ -22,7 +22,7 @@ class AWS {
         // Need to get the Cognito ID before setting up Spotify authentication
         credentialsProvider?.getIdentityId()?.continue( { (task: AWSTask!) -> AnyObject! in
             if (task.error != nil) {
-                print("Error getting Cognito ID: \(task.error!.localizedDescription)")
+                NSLog("Error getting Cognito ID: \(task.error!.localizedDescription)")
                 return task.error as AnyObject
             }
             else {

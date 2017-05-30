@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					spotifyResponseParameters[queryParameter.name] = queryParameter.value
 				}
 				if let errorDescription = spotifyResponseParameters["error"] {
-					print(errorDescription)
+					NSLog(errorDescription)
 				} else if spotifyResponseParameters["code"] != nil {
 					// Spotify is calling Tunetag because scopes were authorized
 					// Use the response code to log in
@@ -120,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
 			// Replace this with code to handle the error appropriately.
 			// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-			print("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
+			NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
 			abort()
 		}
 		
@@ -145,7 +145,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				// Replace this implementation with code to handle the error appropriately.
 				// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
 				let nserror = error as NSError
-				print("Unresolved error \(nserror), \(nserror.userInfo)")
+				NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
 				abort()
 			}
 		}
