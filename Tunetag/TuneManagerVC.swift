@@ -21,8 +21,7 @@ class TuneManagerVC: UITableViewController {
         
     // MARK: Actions/Selectors
     func refreshTunes() {
-        Spotify.user.getUserData { (err:NSError?) in
-            assert(err == nil, err!.description)
+        Spotify.user.getUserData { () in
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
         }

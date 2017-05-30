@@ -11,6 +11,5 @@ import Foundation
 class KeychainCredentials: KeychainItem {
     override init() {
         print("Class KeychainCredentials not implemented")
-        assert(false)
     }
 }

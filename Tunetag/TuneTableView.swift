@@ -17,8 +17,7 @@ class TuneTableView: UITableView, UITableViewDataSource {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         dataSource = self
-        Spotify.user.getUserData { (err:NSError?) in
-            assert(err == nil, err!.description)
+        Spotify.user.getUserData { () in
             self.reloadData()
         }
     }

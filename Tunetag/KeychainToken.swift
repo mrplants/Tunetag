@@ -23,59 +23,64 @@ class KeychainToken: KeychainItem {
 	fileprivate var _accessGroup:String
 	var value:String? {
 		get {
-			if _value != nil {
-				return _value
-			} else {
-				var valueData:Data?
-				let itemSearchError = Keychain.getSecureItem(service, accessGroup: self.accessGroup, data: &valueData)
-				assert(itemSearchError == nil || itemSearchError?.code == Int(errSecItemNotFound as Int32), itemSearchError!.description)
+			var _value:String?
+			var valueData:Data?
+			do {
+				try Keychain.getSecureItem(service, accessGroup: self.accessGroup, data: &valueData)
 				if let returnData = valueData {
 					_value = String(data:returnData, encoding: String.Encoding.utf8)
+					return _value
 				}
-				return _value
+			} catch KeychainError.itemNotFound {
+				print("No token stored in keychain.")
+			} catch {
+				print("Keychain error while getting token.")
 			}
+			return nil
 		}
 		set(token) {
-			let storageError = Keychain.storeSecureItem(token?.data(using: String.Encoding.utf8), service:service, accessGroup: accessGroup)
-			assert(storageError == nil, storageError!.description)
-			_value = token
+			do {
+				try Keychain.storeSecureItem(token?.data(using: String.Encoding.utf8), service:service, accessGroup: accessGroup)
+			} catch {
+				print("Keychain error while storing token.")
+			}
 		}
 	}
-	fileprivate var _value:String?
 	var expirationDate:Date? {
 		get {
-			if _expirationDate != nil {
-				return _expirationDate
-			} else {
-				var expirationData:Data?
-				let attributeSearchError = Keychain.getSecureItemAttribute(service, accessGroup: accessGroup, data: &expirationData)
-				assert(attributeSearchError == nil, attributeSearchError!.description)
+			var _expirationDate:Date?
+			var expirationData:Data?
+			do {
+				try Keychain.getSecureItemAttribute(service, accessGroup: accessGroup, data: &expirationData)
 				if let unwrappedExpirationData = expirationData {
 					_expirationDate = NSKeyedUnarchiver.unarchiveObject(with: unwrappedExpirationData) as? Date
 				} else {
 					_expirationDate = nil
 				}
-				return _expirationDate
+			} catch {
+				print("Keychain error while getting token expiration date.")
 			}
+			return _expirationDate
 		}
 		set(date) {
-			if let unwrappedDate = date {
-				let storageError = Keychain.storeSecureItemAttribute(NSKeyedArchiver.archivedData(withRootObject: unwrappedDate), service: service, accessGroup: accessGroup)
-				assert(storageError == nil, storageError!.description)
-			} else {
-				let storageError = Keychain.storeSecureItemAttribute(nil, service: service, accessGroup: accessGroup)
-				assert(storageError == nil, storageError!.description)
+			do {
+				if let unwrappedDate = date {
+					try Keychain.storeSecureItemAttribute(NSKeyedArchiver.archivedData(withRootObject: unwrappedDate), service: service, accessGroup: accessGroup)
+				} else {
+					try Keychain.storeSecureItemAttribute(nil, service: service, accessGroup: accessGroup)
+				}
+			} catch {
+				print("Keychain error while storing token expiration date.")
 			}
-			_expirationDate = date
 		}
 	}
-	fileprivate var _expirationDate:Date?
 	var isExpired:Bool {
 		get {
 			if let date = expirationDate {
 				// timeIntervalSinceNow is positive if the date is in the future -> token is not expired -> return false
 				return !(date.timeIntervalSinceNow > 0)
 			} else {
+				// Assume the token does not expire if there is no expiration date
 				return false
 			}
 		}
